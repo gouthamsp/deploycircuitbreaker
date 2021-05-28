@@ -3,10 +3,7 @@
   "containerDefinitions": [
     {
       "name": "nginx",
-      "Image": {
-        "Name": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/nginx:latest",
-        "Update": true
-      },
+      "image": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/nginx:latest",
       "hostname": "nginx",
       "essential": true,
       "portMappings": [
@@ -15,25 +12,21 @@
           "containerPort": 80
         }
       ],
-      "links": ["circuitbreaker"],
+      "links": [
+        "circuitbreaker"
+      ],
       "memory": 100
     },
     {
       "name": "circuitbreaker",
-      "Image": {
-        "Name": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/circuitbreaker:latest",
-        "Update": true
-      },
-      "hostname": "gateway",
+      "image": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/circuitbreaker:latest",
+      "hostname": "circuitbreaker",
       "essential": true,
       "memory": 300
     },
     {
       "name": "service1",
-      "Image": {
-        "Name": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/service1:latest",
-        "Update": true
-      },
+      "image": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/service1:latest",
       "hostname": "service1",
       "essential": false,
       "memory": 300
