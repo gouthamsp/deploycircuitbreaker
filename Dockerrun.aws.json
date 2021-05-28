@@ -22,6 +22,9 @@
       "image": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/circuitbreaker:latest",
       "hostname": "circuitbreaker",
       "essential": true,
+      "links": [
+        "service1"
+      ],
       "memory": 300
     },
     {
@@ -29,13 +32,7 @@
       "image": "524932215262.dkr.ecr.ap-south-1.amazonaws.com/service1:latest",
       "hostname": "service1",
       "essential": false,
-      "memory": 300,
-      "portMappings": [
-        {
-          "hostPort": 3002,
-          "containerPort": 3002
-        }
-      ]
+      "memory": 300
     }
   ]
 }
