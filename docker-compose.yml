@@ -1,0 +1,45 @@
+version: "3.3"
+services:
+  # client:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   #ports:
+  #   #  - '3000:3000'
+  #   volumes:
+  #     - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
+  #   restart: on-failure
+  #   container_name: client
+  nginx:
+    depends_on:
+      - circuitbreaker
+    restart: always # because it is routing traffic to our entire app
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - '80:80'
+  circuitbreaker:
+    build:
+      context: ./circuitBreaker
+      dockerfile: Dockerfile
+    #ports:
+    #  - '3001:3001'
+    restart: on-failure
+    container_name: circuitBreaker
+    volumes:
+      - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
+    # env_file:
+    #   - ./env/gateway.env
+  service1:
+    build:
+      context: ./service1
+      dockerfile: Dockerfile
+    #ports:
+    #  - '3002:3002'
+    restart: on-failure
+    container_name: service1
+    volumes:
+      - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
+    # env_file:
+    #   - ./env/service1.env
